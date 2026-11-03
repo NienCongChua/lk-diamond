@@ -1,0 +1,10 @@
+{
+  "retrieved_on": "2026-11-03",
+  "upstream_snapshot_sha256": {
+    "locket.sgmodule": "a157f8beb51b1296c59359207dfed897727abdfe49f03b8234af20e1c2b928a1",
+    "locket.js": "ce00434f225b987cc521de13a3d718a77a07214500e3d1e54f47b7b34b6c1bff",
+    "deleteHeader.js": "3d8e46e7f15627161f4f536055f75c104bde0e8dff383d3b84c07193793ffc8f",
+    "locket_sub.js": "0399a051d80f24edaa32573ab197c9479c2508aefffdd631eba8fea7db1ea55e"
+  },
+  "note": "Upstream hashes identify the reviewed source. New scripts are self-contained; no upstream runtime fetch."
+}
