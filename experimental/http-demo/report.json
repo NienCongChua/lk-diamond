@@ -1,0 +1,41 @@
+{
+  "transport": "real HTTP over loopback",
+  "images": "synthetic numbered fixtures",
+  "locket_tested": false,
+  "locket_adapter": false,
+  "steps": [
+    {
+      "capture": 1,
+      "complete": false,
+      "file": "http-capture-1-of-4.png",
+      "elapsed_ms": 326,
+      "sha256": "bb6787eacaa74ff91c4dfae33f0aefe0a06e00dec392bd69d1ef20698a431492"
+    },
+    {
+      "capture": 2,
+      "complete": false,
+      "file": "http-capture-2-of-4.png",
+      "elapsed_ms": 247,
+      "sha256": "82e561099e24c9d0946d7565f4dde542b1b671fcaad3a652e5ad2a8a4562f119"
+    },
+    {
+      "capture": 3,
+      "complete": false,
+      "file": "http-capture-3-of-4.png",
+      "elapsed_ms": 265,
+      "sha256": "0e03a9b4215aaeb9a97470f7a1d5f343e724a7d05170a232ea81369c429cf63b"
+    },
+    {
+      "capture": 4,
+      "complete": true,
+      "file": "http-capture-4-of-4.png",
+      "elapsed_ms": 292,
+      "sha256": "206153d2dd27e39d12f2b982e35f97fa68b6456a02af548ca2d06558f1c7c2b0"
+    }
+  ],
+  "frame_count": 8,
+  "retry_did_not_add_photo": true,
+  "restyle_preserved_four_photos": true,
+  "deleted_session_unavailable": true,
+  "server_stopped": true
+}

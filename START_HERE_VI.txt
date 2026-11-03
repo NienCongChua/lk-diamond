@@ -1,0 +1,49 @@
+GÓI THỬ LOCKET + PHOTOBOOTH — 03/11/2026
+
+ĐÃ CHẠY: dịch vụ ghép 4 ảnh qua HTTP trên máy tính, 8 khung AI, đổi khung
+giữ nguyên ảnh, xử lý gửi lại request, hết hạn và xóa phiên.
+CHƯA CHẠY: Photobooth ngay trong Locket. Chưa có adapter/API filter thực tế.
+Module Probe bên dưới chỉ dùng xác định điểm nối; nó không thêm nút Photobooth.
+
+THỬ TRÊN IPHONE SAU KHI ANH SẴN SÀNG
+
+Cài nhanh bằng URL (không cần nhập JS cục bộ):
+  Module chính:
+  https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom.sgmodule
+  Module dò filter, bật thêm cùng Custom khi cần kiểm tra:
+  https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Filter-Probe.sgmodule
+Các script được ghim vào commit đã kiểm tra. Tắt module Locket cũ có rule trùng.
+
+Nếu dùng file cục bộ thay vì URL:
+
+1. Dùng Locket-iPhone-Probe.zip nếu chỉ cần thử trên điện thoại.
+2. Nhập scripts/locket-filter-probe.js vào Shadowrocket và ánh xạ hai dòng
+   script-path trong Locket-Filter-Probe.local.sgmodule tới đúng file đã nhập.
+3. Bật Probe cùng module Custom hiện tại (hai bộ này dùng host khác nhau).
+   Nếu dùng bản Custom cũ, thay script bằng scripts/locket-custom.js trong gói.
+4. Mở Locket, chọn filter, chụp thử rồi bấm X chụp lại một lần; chưa cần gửi ảnh.
+5. Lấy các dòng [Locket filter probe] trong log script, kèm thông báo lỗi
+   nhìn thấy trong app. Không cần log mạng đầy đủ, mật khẩu hoặc token.
+6. Tắt Probe sau khi thử. Nếu không có log, xem experimental/TRY_NATIVE_VI.txt.
+
+THỬ PHẦN GHÉP TRÊN MÁY TÍNH (GÓI Locket-Filter-Trial.zip)
+
+Mở terminal tại thư mục đã giải nén:
+  python -m pip install -r experimental/requirements.txt
+  python experimental/photobooth_http_demo.py
+
+Lệnh tự mở server localhost, gửi 4 ảnh giả lập, thử đổi khung rồi dừng server.
+Ảnh và báo cáo nằm trong experimental/http-demo/.
+Không cần tài khoản Locket; đây là kiểm thử backend, không phải kiểm thử iPhone.
+
+Nếu muốn chạy dịch vụ liên tục để phát triển:
+  python experimental/photobooth_server.py --port 8787
+
+Địa chỉ: http://127.0.0.1:8787
+Token riêng của dịch vụ được tạo trong .photobooth-runtime/token-8787.txt.
+Token này không liên quan tài khoản Locket. Ctrl+C dừng dịch vụ và xóa token.
+127.0.0.1 chỉ truy cập trên máy tính đang chạy; iPhone chưa kết nối tới đây.
+
+Chi tiết giao thức tự xây: experimental/LOCAL_API_VI.txt.
+Lượt thử Locket thực tế: experimental/TRY_NATIVE_VI.txt.
+Không dùng địa chỉ hay ID của API nội bộ này như thể là API/ID của Locket.

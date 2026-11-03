@@ -1,0 +1,98 @@
+LOCAL PHOTOBOOTH API v1
+
+Đây là giao thức của bộ ghép tự xây, KHÔNG phải giao thức của Locket.
+Chỉ lắng nghe 127.0.0.1. Không có kết nối đi tới Locket hoặc dịch vụ khác.
+Không triển khai công khai, không thay firewall, không chạy ngầm khi test xong.
+
+CHẠY
+  python experimental/photobooth_server.py --port 8787
+
+Mọi request cần header:
+  Authorization: Bearer <token riêng được tạo bởi server này>
+
+Đọc token từ .photobooth-runtime/token-8787.txt tại máy chạy server.
+Không truyền token trên query string. Không dùng token tài khoản Locket.
+Không có CORS/trang web điều khiển; client Python được cung cấp trong gói.
+
+ROUTES
+
+GET /v1/health
+  JSON {status:"ok", protocol:"local-photobooth/1", locket_adapter:false}
+
+GET /v1/frames
+  8 tên khung, ID nội bộ, đường dẫn PNG overlay và 6 bố cục.
+  grid4 dùng artwork AI; 5 bố cục khác vẫn dùng khung dựng bằng code.
+
+GET /v1/frames/{frame}/overlay.png
+  PNG gốc có alpha. Chỉ cho phép 8 ID trong catalogue.
+
+POST /v1/sessions
+  Content-Type: application/json
+  Idempotency-Key: ID riêng cho một lần tạo phiên
+  Body: {"frame":"cherry_pop","layout":"grid4","caption":""}
+  Trả JSON: session_id, frame, layout, caption, count, total, complete,
+  preview_path. Tạo mới: 201; gửi lại cùng key và lựa chọn: 200 cùng phiên.
+  Cùng key nhưng khác lựa chọn: 409. Cache key tạo phiên giữ 10 phút.
+
+POST /v1/sessions/{session_id}/captures/{index}
+  index bắt đầu từ 1, phải gửi lần lượt tới số ô của bố cục (tối đa 4).
+  Content-Type: image/png, image/jpeg hoặc image/webp
+  Idempotency-Key: ID ổn định của MỘT lần chụp
+  Body: byte ảnh trực tiếp, không JSON/base64/URL; tối đa 8 MiB, 24 MP.
+  Trả PNG vuông 1600 x 1600 sau mỗi lần chụp, kèm header:
+    X-Booth-Count: số ảnh đã lưu
+    X-Booth-Total: số ảnh cần chụp
+    X-Booth-Complete: true hoặc false
+  Nếu mất response thì gửi lại CÙNG index, key và byte ảnh. Không tạo key mới.
+  Hai lần chụp có nội dung giống nhau vẫn là hai ảnh nếu dùng hai key khác nhau.
+  Request sai thứ tự hoặc key bị dùng lại với ảnh khác bị trả 409.
+
+GET /v1/sessions/{session_id}
+  Trạng thái JSON; không có dữ liệu ảnh hay ID tài khoản.
+
+GET /v1/sessions/{session_id}/preview.png
+  PNG trạng thái hiện tại, có thể chưa đủ ảnh.
+
+GET /v1/sessions/{session_id}/final.png
+  Chỉ trả PNG khi đã đủ ảnh; chưa đủ trả 409 capture_incomplete.
+
+PATCH /v1/sessions/{session_id}
+  Content-Type: application/json
+  Body: {"frame":"cosmic"} và/hoặc {"caption":"Kỷ niệm"}
+  Giữ nguyên các ảnh đã chụp, đổi khung/chữ và trả PNG mới.
+  Không đổi bố cục của phiên đang chụp. Muốn đổi bố cục thì tạo phiên mới.
+  Lỗi render không làm thay đổi lựa chọn hoặc làm mất ảnh hiện tại.
+
+DELETE /v1/sessions/{session_id}
+  Xóa ảnh của phiên khỏi bộ nhớ; trả 204. Gửi lại DELETE vẫn trả 204.
+  Gửi lại key tạo phiên đã xóa trong thời gian cache trả 410, không tự tạo lại.
+
+GIỚI HẠN VÀ LỖI
+  400: sai JSON/options/ảnh; 401: token local không đúng; 403: browser Origin;
+  404: không có phiên/route; 409: xung đột/thứ tự/chưa đủ ảnh;
+  410: key tạo phiên đã xóa/hết hạn; 413: ảnh quá lớn; 415: sai content type;
+  429: đủ 4 phiên hoặc quá nhiều lần tạo; 503: đang bận, thử lại cùng request.
+  JSON lỗi: {"error":{"code":"...","message":"..."}}
+
+Mỗi phiên tối đa 10 phút không có capture/restyle thành công. Server tự dọn
+phiên ngay cả khi không có request; dừng server xóa tất cả phiên.
+Token mới được sinh mỗi lần mở server. Request cần Content-Length, không
+nhận chunked/compressed body. Không tải ảnh từ URL và không ghi ảnh ra đĩa.
+Chỉ lệnh demo chủ động ghi ảnh giả lập và báo cáo vào thư mục đầu ra.
+
+CLIENT VÀ THỬ NGHIỆM
+  photobooth_client.py: client chuẩn cho giao thức trên, thử lại lỗi mạng với
+  cùng body/key; không thử lại lỗi 400/401/403/409 như thể request đã thành công.
+  photobooth_http_demo.py: tự khởi động server trên cổng trống, gửi 4 ảnh,
+  gửi lại request cuối, đổi khung, lấy ảnh hoàn tất, xóa phiên, rồi dừng server.
+  tests/photobooth_http_test.py: kiểm thử qua socket HTTP thật trên loopback.
+
+ĐỂ NỐI VỚI LOCKET
+  Cần adapter đọc đúng request/catalogue thật và trả đúng response app chờ.
+  Chưa có dữ liệu này; không có rewrite nào gửi ảnh Locket vào server trên.
+  Lõi Python không chạy trong Shadowrocket. Dùng trên điện thoại về sau còn
+  cần nơi chạy dịch vụ phù hợp và kết nối đã cấu hình; localhost PC chưa đủ.
+
+Server dùng thư viện chuẩn để thử trên máy. Tài liệu Python xác định
+http.server không phù hợp triển khai production:
+https://docs.python.org/3/library/http.server.html

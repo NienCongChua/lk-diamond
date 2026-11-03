@@ -1,0 +1,8 @@
+#!name=Locket Schema Diagnostics v1.0
+#!desc=Read-only key/type logging. Disable other Locket rewrites while inspecting.
+
+[MITM]
+hostname = %APPEND% firebaseremoteconfig.googleapis.com
+
+[Script]
+nien_locket_schema = type=http-response, pattern=^https:\/\/firebaseremoteconfig\.googleapis\.com\/v1\/projects\/locket-[A-Za-z0-9_-]+\/namespaces\/[^/?#]+:fetch(?:\?[^#]*)?$, script-path=locket-diagnostics.js, requires-body=true, max-size=1048576, timeout=10

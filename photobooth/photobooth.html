@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src blob: data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Little Moments · Photobooth</title>
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#27251f;background:#f3f0e8;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #d9d4c7;background:#fffefb;color:#353428;border-radius:12px;padding:11px 14px}button:hover{background:#eeebdf}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9ea87b;outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}header{max-width:1180px;margin:auto;padding:28px 24px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #dcd6c8}.brand{font-family:Georgia,serif;font-size:27px;letter-spacing:-1px}.brand span{font-family:system-ui;font-size:11px;letter-spacing:3px;display:block;text-transform:uppercase;margin-bottom:7px;color:#6b7053}.tag{font-size:12px;border:1px solid #cbd0bd;border-radius:30px;padding:8px 12px;color:#596047;background:#e9eddf}main{max-width:1180px;margin:auto;padding:28px 24px;display:grid;grid-template-columns:330px 1fr;gap:38px}.panel{display:flex;flex-direction:column;gap:23px}h1{font-family:Georgia,serif;font-size:36px;font-weight:400;margin:0 0 10px;line-height:1.1}p{font-size:13px;line-height:1.6;margin:0;color:#69665b}.step{font-size:11px;color:#858276;text-transform:uppercase;letter-spacing:1.9px;margin-bottom:10px;font-weight:700}.upload{display:block;text-align:center;border:1px dashed #929c76;border-radius:14px;background:#e9eddf;padding:19px;cursor:pointer;font-size:14px}.upload strong{display:block;margin-bottom:5px}.upload small{color:#65704f}.upload input{display:block;max-width:100%;font-size:11px;margin-top:10px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.layout[aria-pressed=true]{background:#596348;color:white;border-color:#596348}.themes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.theme{padding:8px 3px;font-size:10px}.swatch{display:block;width:30px;height:30px;border-radius:50%;margin:0 auto 5px;border:1px solid #ccc}.theme[aria-pressed=true]{outline:2px solid #596348}.field{display:block;font-size:12px;color:#5e5c53;margin-bottom:10px}.field input[type=text],select{display:block;background:#fffefb;border:1px solid #d9d4c7;border-radius:10px;padding:11px;width:100%;margin-top:7px;color:#353428}.check{display:flex;align-items:center;gap:9px;font-size:12px;margin:10px 0;line-height:1.5}.check input{accent-color:#596348}.stage{background:#e7e2d6;border:1px solid #d9d2c2;border-radius:22px;min-height:590px;display:flex;flex-direction:column;align-items:center;padding:28px 20px;gap:16px}.stage-label{font-size:10px;letter-spacing:2.5px;color:#716e60;text-transform:uppercase}.canvas-wrap{height:470px;width:100%;display:flex;align-items:center;justify-content:center}canvas{max-width:100%;max-height:100%;width:auto;height:auto;box-shadow:0 14px 35px #4c402126;border-radius:2px}.stage-bottom{display:flex;justify-content:space-between;gap:10px;width:100%;font-size:11px;color:#777061}.export{display:flex;gap:8px;margin-top:16px}.primary{background:#586348;border-color:#586348;color:#fff;flex:1}.primary:hover{background:#424e35}#status{font-size:12px;margin-top:10px;min-height:38px}#photos{display:flex;flex-direction:column;gap:8px;margin-top:12px}.photo-row{display:flex;align-items:center;gap:7px;border:1px solid #ded9cc;padding:7px;border-radius:10px}.photo-row img{width:42px;height:42px;object-fit:cover;border-radius:5px}.photo-row span{font-size:11px;flex:1}.photo-row button{padding:7px;font-size:12px;min-width:32px}.notice{padding:12px 14px;background:#ede9df;border-radius:12px;font-size:11px;line-height:1.6;color:#726e63}footer{max-width:1180px;margin:auto;padding:0 24px 28px;font-size:11px;color:#858172}@media(max-width:760px){header{padding:20px 16px}.brand{font-size:23px}.tag{font-size:10px}main{grid-template-columns:1fr;padding:22px 16px;gap:22px}.panel{gap:19px}.preview{grid-row:1}.stage{min-height:0;padding:16px}.canvas-wrap{height:350px}h1{font-size:29px}.controls{grid-template-columns:repeat(3,1fr)}.layout{font-size:11px;padding:11px 5px}.themes{grid-template-columns:repeat(8,1fr);gap:4px}.theme{font-size:9px}.swatch{width:23px;height:23px}.export button{font-size:12px}footer{padding:0 16px 22px}}
+</style></head><body>
+<header><div class="brand"><span>Niên · Photo journal</span>little moments.</div><div class="tag">Ảnh xử lý trên thiết bị</div></header>
+<main><section class="panel"><div><h1>Giữ lại một<br>chút hôm nay.</h1><p>Ghép ảnh vào khung, thêm một dòng chữ, rồi lưu để dùng trong Locket hoặc chia sẻ ở nơi anh muốn.</p></div>
+<div><div class="step">01 / Chọn ảnh</div><label class="upload"><strong>Thêm những khoảnh khắc</strong><small>JPG, PNG, WebP · tối đa 4 ảnh, 20 MB/ảnh</small><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple></label><div id="photos"></div></div>
+<div><div class="step">02 / Bố cục</div><div id="layouts" class="controls"></div></div>
+<div><div class="step">03 / Kiểu khung</div><div id="themes" class="themes"></div></div>
+<div><div class="step">04 / Dấu ấn của anh</div><label class="field">Dòng chữ dưới ảnh<input id="caption" type="text" maxlength="50" value="little moments, big feelings"></label><label class="check"><input id="square" type="checkbox" checked>Xuất ảnh vuông, giữ trọn bố cục khi chọn trong Locket</label><label class="check"><input id="date" type="checkbox">Thêm ngày hôm nay</label><label class="check"><input id="mono" type="checkbox">Ảnh đen trắng</label><label class="field">Vị trí cắt ảnh<select id="crop"><option value="center">Giữa ảnh</option><option value="top">Ưu tiên phần trên</option><option value="bottom">Ưu tiên phần dưới</option></select></label></div>
+<div class="notice">Đây là công cụ ghép ảnh độc lập, không thêm nút Photobooth vào ứng dụng Locket. Chọn “Lưu PNG”, lưu ảnh vào thư viện rồi chọn ảnh đó trong Locket nếu tài khoản/phiên bản của anh hỗ trợ.</div>
+</section><section class="preview"><div class="stage"><div class="stage-label">Your moments · Your frame</div><div class="canvas-wrap"><canvas id="canvas" width="1600" height="1600" aria-label="Bản xem trước ảnh ghép Photobooth"></canvas></div><div class="stage-bottom"><span id="size"></span><span id="count"></span></div></div><div class="export"><button id="download" class="primary">Lưu PNG</button><button id="share">Chia sẻ ảnh</button><button id="reset">Xóa ảnh</button></div><div class="export"><button id="template">Tải khung PNG trong suốt</button></div><p id="status" role="status" aria-live="polite">Các ô đánh số là ảnh mẫu. Thêm ảnh để bắt đầu.</p></section></main><footer>Không đăng nhập · Không tải ảnh lên máy chủ · Hoạt động không cần mạng sau khi mở file</footer>
+<script>
+'use strict';
+const layouts=[
+ {id:'polaroid',name:'Polaroid',w:1400,h:1600,slots:[[.075,.06,.85,.76]]},
+ {id:'duo',name:'Đôi dọc',w:1200,h:1800,slots:[[.08,.05,.84,.40],[.08,.48,.84,.40]]},
+ {id:'strip3',name:'Dải 3 ảnh',w:900,h:2100,slots:[[.10,.04,.80,.27],[.10,.33,.80,.27],[.10,.62,.80,.27]]},
+ {id:'strip4',name:'Dải 4 ảnh',w:900,h:2700,slots:[[.10,.03,.80,.205],[.10,.25,.80,.205],[.10,.47,.80,.205],[.10,.69,.80,.205]]},
+ {id:'grid4',name:'Lưới 2 × 2',w:1600,h:1800,slots:[[.055,.05,.43,.405],[.515,.05,.43,.405],[.055,.48,.43,.405],[.515,.48,.43,.405]]},
+ {id:'hero3',name:'Một lớn + hai',w:1600,h:1800,slots:[[.055,.05,.89,.51],[.055,.585,.43,.30],[.515,.585,.43,.30]]}
+];
+const themes=[
+ {id:'cream',name:'Kem',bg:'#F8F1E5',ink:'#6A5745',accent:'#BBA68C',style:'line'},
+ {id:'pink',name:'Hồng',bg:'#FFE4EC',ink:'#8C4661',accent:'#D69AB0',style:'hearts'},
+ {id:'film',name:'Film',bg:'#242321',ink:'#F2DEC0',accent:'#9C8565',style:'film'},
+ {id:'lavender',name:'Tím',bg:'#EEE7FA',ink:'#695387',accent:'#B49BCD',style:'stars'},
+ {id:'sage',name:'Xanh lá',bg:'#E9EEDC',ink:'#4D6548',accent:'#9CB18B',style:'line'},
+ {id:'sky',name:'Bầu trời',bg:'#DFF0FC',ink:'#426682',accent:'#9EBED7',style:'dots'},
+ {id:'noir',name:'Đen trắng',bg:'#F8F8F6',ink:'#232323',accent:'#8A8A85',style:'double'},
+ {id:'gold',name:'Vàng',bg:'#282621',ink:'#E8CC87',accent:'#BE9D58',style:'double'}
+];
+let activeLayout=layouts[4],activeTheme=themes[0],photos=[],loading=false;
+const $=id=>document.getElementById(id),canvas=$('canvas'),ctx=canvas.getContext('2d');
+function status(text){$('status').textContent=text;}
+function controls(){
+ $('layouts').replaceChildren(...layouts.map(l=>{let b=document.createElement('button');b.className='layout';b.textContent=l.name;b.dataset.id=l.id;b.setAttribute('aria-pressed',String(l===activeLayout));b.onclick=()=>{activeLayout=l;controls();render();};return b;}));
+ $('themes').replaceChildren(...themes.map(t=>{let b=document.createElement('button');b.className='theme';b.dataset.id=t.id;b.setAttribute('aria-pressed',String(t===activeTheme));let sw=document.createElement('span');sw.className='swatch';sw.style.background=t.bg;sw.style.borderColor=t.ink;b.append(sw,document.createTextNode(t.name));b.onclick=()=>{activeTheme=t;controls();render();};return b;}));
+}
+function drawPhoto(p,x,y,w,h){
+ ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+ if(p){let scale=Math.max(w/p.img.width,h/p.img.height),dw=p.img.width*scale,dh=p.img.height*scale;
+ let cy=$('crop').value==='top'?0:$('crop').value==='bottom'?h-dh:(h-dh)/2;
+ if($('mono').checked)ctx.filter='grayscale(1)';ctx.drawImage(p.img,x+(w-dw)/2,y+cy,dw,dh);
+ }else{let g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,activeTheme.accent);g.addColorStop(1,activeTheme.bg);ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.fillStyle=activeTheme.ink;ctx.globalAlpha=.5;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=Math.round(Math.min(w,h)*.16)+'px Georgia';ctx.fillText('YOUR MOMENT',x+w/2,y+h*.45);ctx.font=Math.round(Math.min(w,h)*.1)+'px system-ui';ctx.fillText(String(activeLayout.slots.findIndex(s=>Math.abs(s[0]*activeLayout.w-x)<1&&Math.abs(s[1]*activeLayout.h-y)<1)+1),x+w/2,y+h*.62);}
+ ctx.restore();
+}
+function decorate(W,H,t){
+ ctx.strokeStyle=t.accent;ctx.fillStyle=t.accent;ctx.lineWidth=Math.max(2,W*.0015);
+ if(t.style==='line'||t.style==='double'){ctx.strokeRect(W*.025,H*.015,W*.95,H*.97);if(t.style==='double')ctx.strokeRect(W*.036,H*.023,W*.928,H*.954);}
+ if(t.style==='film'){for(let y=H*.04;y<H*.91;y+=H*.037){ctx.fillRect(W*.027,y,W*.026,H*.016);ctx.fillRect(W*.947,y,W*.026,H*.016);}}
+ if(['hearts','stars','dots'].includes(t.style)){ctx.font=Math.round(W*.026)+'px Georgia';ctx.textAlign='center';for(let y=H*.055;y<H*.89;y+=H*.09){const symbol=t.style==='hearts'?'♡':t.style==='stars'?'✦':'·';ctx.fillText(symbol,W*.034,y);ctx.fillText(symbol,W*.966,y);}}
+}
+function render(){
+ const l=activeLayout,t=activeTheme,square=$('square').checked;
+ canvas.width=square?1600:l.w;canvas.height=square?1600:l.h;
+ ctx.fillStyle=t.bg;ctx.fillRect(0,0,canvas.width,canvas.height);
+ const scale=square?Math.min(1480/l.w,1480/l.h):1,ox=(canvas.width-l.w*scale)/2,oy=(canvas.height-l.h*scale)/2;
+ ctx.save();ctx.translate(ox,oy);ctx.scale(scale,scale);decorate(l.w,l.h,t);
+ l.slots.forEach((s,i)=>drawPhoto(photos[i],s[0]*l.w,s[1]*l.h,s[2]*l.w,s[3]*l.h));
+ ctx.fillStyle=t.ink;ctx.textAlign='center';ctx.textBaseline='middle';
+ let size=l.w*.037,text=$('caption').value.trim();ctx.font=size+'px Georgia';while(ctx.measureText(text).width>l.w*.86&&size>10){size--;ctx.font=size+'px Georgia';}
+ ctx.fillText(text,l.w*.5,l.h*(l.id==='polaroid'?.892:.935));
+ if($('date').checked){ctx.font=l.w*.021+'px system-ui';ctx.globalAlpha=.7;ctx.fillText(new Date().toLocaleDateString('vi-VN'),l.w*.5,l.h*(l.id==='polaroid'?.94:.968));}
+ ctx.restore();
+ $('size').textContent=canvas.width+' × '+canvas.height+' px · PNG';
+ $('count').textContent=Math.min(photos.length,l.slots.length)+' / '+l.slots.length+' ảnh';
+ const incomplete=photos.length<l.slots.length||loading;$('download').disabled=incomplete;$('share').disabled=incomplete||!navigator.share;
+}
+function photoRows(){
+ $('photos').replaceChildren(...photos.map((p,i)=>{
+  let row=document.createElement('div');row.className='photo-row';let im=document.createElement('img');im.src=p.url;im.alt='Ảnh '+(i+1);let label=document.createElement('span');label.textContent='Ảnh '+(i+1);row.append(im,label);
+  for(const [symbol,title,fn,disabled] of [['↑','Đưa ảnh lên',()=>{[photos[i-1],photos[i]]=[photos[i],photos[i-1]];},i===0],['↓','Đưa ảnh xuống',()=>{[photos[i+1],photos[i]]=[photos[i],photos[i+1]];},i===photos.length-1],['×','Xóa ảnh',()=>{URL.revokeObjectURL(photos[i].url);photos.splice(i,1);},false]]){let b=document.createElement('button');b.textContent=symbol;b.title=title;b.setAttribute('aria-label',title+' '+(i+1));b.disabled=disabled;b.onclick=()=>{fn();photoRows();render();};row.append(b);}return row;
+ }));
+}
+function loadImage(file){return new Promise((resolve,reject)=>{let url=URL.createObjectURL(file),img=new Image();img.onload=()=>resolve({img,url});img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Ảnh không đọc được. Với HEIC, hãy chuyển sang JPG/PNG nếu trình duyệt chưa hỗ trợ.'));};img.src=url;});}
+$('files').onchange=async function(){
+ if(loading)return;loading=true;this.disabled=true;render();let failures=[],selected=Array.from(this.files),available=4-photos.length;
+ for(const f of selected.slice(0,available)){if(f.size>20*1024*1024){failures.push('Một ảnh vượt quá 20 MB.');continue;}try{photos.push(await loadImage(f));}catch(e){failures.push(e.message);}}
+ if(selected.length>available)failures.push('Chỉ giữ tối đa 4 ảnh. Xóa bớt ảnh trước khi thêm ảnh mới.');
+ loading=false;this.disabled=false;this.value='';photoRows();render();status(failures.length?failures.join(' '):'Đã thêm ảnh. Có thể đổi thứ tự bằng nút ↑ ↓.');
+};
+['caption','square','date','mono','crop'].forEach(id=>$(id).addEventListener('input',render));
+$('reset').onclick=()=>{if(loading)return;photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];photoRows();render();status('Đã xóa ảnh khỏi công cụ. File ảnh gốc trên thiết bị không bị xóa.');};
+function blob(){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Không xuất được ảnh.')),'image/png'));}
+function renderTemplate(){
+ render();const l=activeLayout,square=$('square').checked,scale=square?Math.min(1480/l.w,1480/l.h):1,ox=(canvas.width-l.w*scale)/2,oy=(canvas.height-l.h*scale)/2;
+ l.slots.forEach(s=>ctx.clearRect(ox+s[0]*l.w*scale,oy+s[1]*l.h*scale,s[2]*l.w*scale,s[3]*l.h*scale));
+}
+$('template').onclick=async()=>{try{renderTemplate();let b=await blob();render();let url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='frame-'+activeLayout.id+'-'+activeTheme.id+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);status('Đã xuất khung PNG với các ô ảnh trong suốt.');}catch(e){render();status(e.message);}};
+$('download').onclick=async()=>{try{let b=await blob(),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='photobooth-'+activeLayout.id+'-'+activeTheme.id+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);status('Đã tạo PNG. Trên iPhone, mở ảnh tải về và chọn Lưu hình ảnh nếu ảnh chưa vào thư viện.');}catch(e){status(e.message);}};
+$('share').onclick=async()=>{try{let file=new File([await blob()],'photobooth.png',{type:'image/png'});if(navigator.canShare&&!navigator.canShare({files:[file]})){status('Trình duyệt không hỗ trợ chia sẻ file. Anh dùng Lưu PNG nhé.');return;}await navigator.share({files:[file]});status('Đã mở bảng chia sẻ của thiết bị.');}catch(e){status(e.name==='AbortError'?'Đã đóng bảng chia sẻ.':'Không chia sẻ được. Anh dùng Lưu PNG nhé.');}};
+controls();render();
+</script></body></html>

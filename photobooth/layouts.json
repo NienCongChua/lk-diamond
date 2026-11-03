@@ -1,0 +1,222 @@
+{
+  "layouts": [
+    {
+      "id": "polaroid",
+      "name": "Polaroid",
+      "w": 1400,
+      "h": 1600,
+      "slots": [
+        [
+          0.075,
+          0.06,
+          0.85,
+          0.76
+        ]
+      ]
+    },
+    {
+      "id": "duo",
+      "name": "Đôi dọc",
+      "w": 1200,
+      "h": 1800,
+      "slots": [
+        [
+          0.08,
+          0.05,
+          0.84,
+          0.4
+        ],
+        [
+          0.08,
+          0.48,
+          0.84,
+          0.4
+        ]
+      ]
+    },
+    {
+      "id": "strip3",
+      "name": "Dải 3 ảnh",
+      "w": 900,
+      "h": 2100,
+      "slots": [
+        [
+          0.1,
+          0.04,
+          0.8,
+          0.27
+        ],
+        [
+          0.1,
+          0.33,
+          0.8,
+          0.27
+        ],
+        [
+          0.1,
+          0.62,
+          0.8,
+          0.27
+        ]
+      ]
+    },
+    {
+      "id": "strip4",
+      "name": "Dải 4 ảnh",
+      "w": 900,
+      "h": 2700,
+      "slots": [
+        [
+          0.1,
+          0.03,
+          0.8,
+          0.205
+        ],
+        [
+          0.1,
+          0.25,
+          0.8,
+          0.205
+        ],
+        [
+          0.1,
+          0.47,
+          0.8,
+          0.205
+        ],
+        [
+          0.1,
+          0.69,
+          0.8,
+          0.205
+        ]
+      ]
+    },
+    {
+      "id": "grid4",
+      "name": "Lưới 2 × 2",
+      "w": 1600,
+      "h": 1800,
+      "slots": [
+        [
+          0.055,
+          0.05,
+          0.43,
+          0.405
+        ],
+        [
+          0.515,
+          0.05,
+          0.43,
+          0.405
+        ],
+        [
+          0.055,
+          0.48,
+          0.43,
+          0.405
+        ],
+        [
+          0.515,
+          0.48,
+          0.43,
+          0.405
+        ]
+      ]
+    },
+    {
+      "id": "hero3",
+      "name": "Một lớn + hai",
+      "w": 1600,
+      "h": 1800,
+      "slots": [
+        [
+          0.055,
+          0.05,
+          0.89,
+          0.51
+        ],
+        [
+          0.055,
+          0.585,
+          0.43,
+          0.3
+        ],
+        [
+          0.515,
+          0.585,
+          0.43,
+          0.3
+        ]
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "id": "cream",
+      "name": "Kem",
+      "bg": "#F8F1E5",
+      "ink": "#6A5745",
+      "accent": "#BBA68C",
+      "style": "line"
+    },
+    {
+      "id": "pink",
+      "name": "Hồng",
+      "bg": "#FFE4EC",
+      "ink": "#8C4661",
+      "accent": "#D69AB0",
+      "style": "hearts"
+    },
+    {
+      "id": "film",
+      "name": "Film",
+      "bg": "#242321",
+      "ink": "#F2DEC0",
+      "accent": "#9C8565",
+      "style": "film"
+    },
+    {
+      "id": "lavender",
+      "name": "Tím",
+      "bg": "#EEE7FA",
+      "ink": "#695387",
+      "accent": "#B49BCD",
+      "style": "stars"
+    },
+    {
+      "id": "sage",
+      "name": "Xanh lá",
+      "bg": "#E9EEDC",
+      "ink": "#4D6548",
+      "accent": "#9CB18B",
+      "style": "line"
+    },
+    {
+      "id": "sky",
+      "name": "Bầu trời",
+      "bg": "#DFF0FC",
+      "ink": "#426682",
+      "accent": "#9EBED7",
+      "style": "dots"
+    },
+    {
+      "id": "noir",
+      "name": "Đen trắng",
+      "bg": "#F8F8F6",
+      "ink": "#232323",
+      "accent": "#8A8A85",
+      "style": "double"
+    },
+    {
+      "id": "gold",
+      "name": "Vàng",
+      "bg": "#282621",
+      "ink": "#E8CC87",
+      "accent": "#BE9D58",
+      "style": "double"
+    }
+  ],
+  "schema": "little-moments-photobooth-v1",
+  "note": "Local renderer schema, NOT a Locket Remote Config schema."
+}

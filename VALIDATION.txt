@@ -1,0 +1,86 @@
+Locket Custom v1.0 — validation record, 2026-11-03
+
+GITHUB PUBLICATION CANDIDATE — 2026-11-03
+Target repository: https://github.com/NienCongChua/lk-diamond
+Pinned script commit: d5c03bd81404517ea5dfc746890d1a7f7a866283
+PASS: 44 rewrite + 11 probe + 30 Python tests rerun before packaging (85 total).
+Hosted modules use full HTTPS script URLs at the pinned commit.
+Runtime tokens, Python caches and local machine source paths excluded from
+published packages. Native iPhone/Shadowrocket integration remains untested.
+
+LOCAL HTTP SERVICE UPDATE — 2026-11-03
+PASS: 30 Python unittest cases (12 engine + 18 real loopback HTTP integration).
+Coverage includes auth/origin/host scope, idempotent creation and concurrent
+capture retries, loss of response after a committed photo, limits, malformed
+input, expiry/deletion, final-image gate and transactional frame changes.
+PASS: standalone HTTP demo captured 4 synthetic photos, retried the final
+capture without duplication, changed frame without losing photos, retrieved
+the final PNG, deleted the session and stopped the server.
+PASS: CLI server started on a random local port; token file used successfully
+for health/catalogue; Ctrl+C stopped service and removed its token file.
+PASS: visually inspected the final restyled HTTP output.
+HTTP demo evidence: experimental/http-demo/report.json and PNG files.
+
+The HTTP paths belong to this project, NOT Locket. No Locket adapter has been
+implemented; no public image server deployed; no iPhone request has been tested.
+The user deferred phone testing until the trial package is prepared.
+No services were left running after validation.
+
+Run: python -m unittest discover -s tests -p '*_test.py' -v
+Demo: python experimental/photobooth_http_demo.py
+Build both trial ZIPs: python tools/build_trial.py
+
+AI FRAME ARTWORK UPDATE — 2026-11-03
+Created eight RGBA PNG overlays with the built-in image_gen tool. Original
+generated files copied byte-for-byte into experimental/frames-ai/; alpha kept.
+Four transparent windows per frame measured from alpha, not guessed coordinates.
+Grid4 compositor now renders photos below the generated overlay. Other layouts
+retain the procedural renderer. No new Locket network/native integration.
+PASS: all 12 engine unittest cases after switching grid4 to generated artwork.
+Prompt set saved at experimental/frames-ai/prompts.json.
+
+LATEST INCREMENTAL VALIDATION — native filter experiment, 2026-11-03
+PASS: 44 rewrite tests on Node.js v24.14.1 (including server filter list preservation).
+PASS: 11 read-only filter probe tests: exact-host scope, upload body not read,
+      string/header/query redaction, bounded schema output, fail-open result.
+PASS: 12 Python unittest cases using Pillow 12.2.0: ordered captures, idempotent
+      retry, independent sessions, expiry/deletion/capacity, malformed image
+      rejection, EXIF/alpha handling, atomic capture on render failure,
+      all eight frame themes and all six layouts produce square PNG output.
+PASS: node --check for both changed/new runtime JavaScript files.
+PASS: generated local modules; native probe only targets api.locketcamera.com
+      so it can coexist with Custom's Remote Config rule.
+PASS: visually inspected new contact sheet, capture 1/4 and completed cosmic
+      frame. Fixed decorations clipped at the bottom; regenerated demo images.
+
+NOT IMPLEMENTED: adapter from the Locket filter request/response to the Python
+engine. No native Photobooth menu injection, image service deployment or camera
+control. The Python engine is not runnable inside Shadowrocket JavaScript.
+NOT TESTED: actual iPhone/Shadowrocket runtime, live filter/API, final send.
+The user's device has a filter button but effects are not working; cause unknown.
+New demo files are synthetic numbered fixtures, not screenshots of Locket.
+
+Run: node tests/rewrite.test.cjs
+Run: node tests/filter-probe.test.cjs
+Run: python -m unittest discover -s tests -p native_photobooth_test.py -v
+Demo: python experimental/native_photobooth.py --demo experimental/demo
+
+HISTORICAL BASELINE (not all rerun in this increment; editor files unchanged):
+
+PASS: 40 JavaScript rewrite tests under Node.js v24.22.1 with synthetic requests/responses.
+PASS: 14 Canvas and control-handler tests using @napi-rs/canvas and a minimal DOM stub.
+PASS: 48 template PNGs, expected dimensions and transparent photo slots.
+PASS: module script paths resolve to included source filenames.
+PASS: HTTPS module generator produces consistent script URLs.
+PASS: manual visual inspection of individual template and complete contact sheet.
+
+NOT TESTED: native Shadowrocket parser/runtime, local script import UI, iPhone, live Locket API, real Gold entitlement behavior, native Photobooth integration.
+NOT TESTED: actual browser DOM/CSS rendering and Safari file/share support. Browser runtime installation was unavailable; Canvas tests do not replace a browser test.
+No user credentials, private photos or live account requests were used.
+
+Run rewrite tests: node tests/rewrite.test.cjs
+Run Canvas tests: node tests/photobooth.test.cjs (requires @napi-rs/canvas)
+
+The native Photobooth portion is unresolved. The bundled editor and frame assets are independent of Locket's UI. See README_VI.md.
+
+AI ART QA: all eight RGBA assets match imagegen originals byte-for-byte; four window centers alpha < 5. Visually inspected clean frame gallery and filled cherry composition. Both ZIP archives integrity-checked.

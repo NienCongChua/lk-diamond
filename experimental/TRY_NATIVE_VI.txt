@@ -1,0 +1,83 @@
+THỬ LUỒNG FILTER TRONG LOCKET — 03/11/2026
+
+Tình trạng: đã có lõi ghép ảnh, dịch vụ HTTP localhost, client và module dò API.
+CHƯA có Photobooth hoạt động trong Locket. Module dò không thêm filter mới.
+Mục tiêu lần thử này: tìm vì sao có nút filter nhưng chọn hiệu ứng chưa chạy,
+và xác định API cần nối vào lõi ghép ảnh.
+
+1. TRÊN IPHONE
+
+- Cập nhật script locket-custom.js nếu đang dùng bản Custom của dự án.
+  Bản sửa giữ danh sách filter máy chủ, thay vì ghi đè bằng 35 ID cũ.
+- Nhập scripts/locket-filter-probe.js vào nơi quản lý script của Shadowrocket.
+- Nhập Locket-Filter-Probe.local.sgmodule. Hai dòng script-path phải trỏ đúng
+  file JS vừa nhập. Chỉ chép hai file cạnh nhau trong Files chưa chắc đủ.
+- Có thể bật Probe cùng Locket-Custom: hai module dùng host khác nhau.
+  Tạm tắt module khác có script trên api.locketcamera.com để tránh tranh rule.
+  Probe cần HTTPS Decryption/MITM cho api.locketcamera.com và CA đã được tin cậy,
+  giống điều kiện HTTPS rewrite của module đang dùng. File không tự cài CA.
+- Mở lại Locket, mở bảng filter, chọn một hiệu ứng có sẵn và chụp ảnh thử
+  không có thông tin cá nhân. Bấm X rồi thử chụp lại một lần. Chưa cần gửi ảnh.
+- Mở log script của Shadowrocket; lấy các dòng bắt đầu [Locket filter probe]
+  trong khoảng thao tác này. Ghi thêm tên hiệu ứng và thông báo lỗi nhìn thấy.
+  Chỉ cần các dòng probe, không cần log mạng đầy đủ hoặc ảnh chụp tài khoản.
+- Tắt Probe sau khi thử. Nếu thao tác Locket lỗi sau khi bật, tắt Probe để
+  kiểm tra lại; tương thích runtime thực tế chưa được xác nhận trên iPhone.
+
+Nếu KHÔNG CÓ LOG: chưa đủ để kết luận không có API. Có thể do cache, script
+chưa được ánh xạ, traffic chưa qua MITM, filter gọi host khác hoặc body vượt
+giới hạn runtime. Probe mặc định chỉ nhận api.locketcamera.com.
+
+Mã HTTP 401/403 cho biết yêu cầu bị từ chối, chưa xác định được nguyên nhân
+chính xác. HTTP 200 cũng chưa chứng minh filter thành công: có thể là job
+đang xử lý hoặc lỗi ứng dụng nằm trong JSON. Cần đọc cấu trúc và đối chiếu UI.
+
+2. LÕI GHÉP ĐÃ CÓ TRONG MÁY TÍNH
+
+experimental/native_photobooth.py
+  - Bố cục grid4 dùng 8 khung PNG v2 tạo bằng imagegen, có sticker/ren/nơ và
+    chất liệu giấy. PNG nằm ở experimental/frames-ai/, có alpha thật.
+  - Năm bố cục khác vẫn dùng khung vẽ bằng code, chưa dùng bộ artwork mới.
+  - Lưu 1 đến 4 ảnh trong phiên; xuất PNG vuông 1600 px sau mỗi lần chụp.
+  - Giữ thứ tự ảnh; request gửi lại dùng cùng capture_id không thêm ảnh trùng.
+  - Hai lần chụp có nội dung giống nhau vẫn được giữ nếu capture_id khác nhau.
+  - Phiên hoàn tất cần tạo phiên mới; có xóa và hết hạn, giới hạn 4 phiên.
+  - Ảnh chỉ nằm trong RAM; HTTP server tự dọn phiên khi không có request mới.
+    Nếu dùng engine riêng trong một server khác, caller cần gọi expire() định kỳ.
+  - Có HTTP server LOCAL ở photobooth_server.py, chưa có adapter Locket.
+    Server không tải ảnh từ URL bên ngoài. API chi tiết ở LOCAL_API_VI.txt.
+
+Cài thư viện khi cần:
+  python -m pip install -r experimental/requirements.txt
+
+Chạy demo từ thư mục gốc dự án:
+  python experimental/native_photobooth.py --demo experimental/demo
+
+Thử đầy đủ bằng HTTP thật trên máy tính (tự mở rồi dừng server):
+  python experimental/photobooth_http_demo.py
+Kết quả và report.json nằm trong experimental/http-demo/.
+
+Xem experimental/demo/contact-sheet.png và capture-1-of-4.png đến
+capture-4-of-4.png. Đây là ảnh thử đánh số, không phải ảnh chụp từ Locket.
+Xem experimental/demo/frames-ai-preview.png để xem riêng 8 khung mới.
+Tên preset trong photobooth_presets.json là tên nội bộ của lõi ghép;
+không dán chúng vào camera_filter_config như thể là ID Locket đã được hỗ trợ.
+
+3. PHẦN CÒN THIẾU ĐỂ CHẠY TRONG APP
+
+- Endpoint/catalogue thật mà app dùng để chọn và xử lý filter.
+- Cấu trúc request ảnh và response kết quả, có dùng job/polling hay không.
+- Cách phân biệt lần chụp mới với request gửi lại, và cách gắn phiên chụp.
+- Adapter giữ đúng hợp đồng API để Locket nhận và hiển thị PNG đã ghép.
+- Chỗ chạy lõi ảnh nếu cần backend; hiện chưa triển khai dịch vụ nào.
+- Thử trên iPhone: ảnh xem trước, nút X, hoàn tất phiên và ảnh người nhận thấy.
+
+Không dùng tài khoản/mật khẩu Locket cho lõi ghép. Không giả lập request tới
+API thật khi chưa biết hợp đồng. Module dò hiện tại trả $done({}) nguyên trạng.
+
+Nguồn kiểm tra cơ chế hook (Surge; chưa xác nhận toàn bộ tương thích Shadowrocket):
+https://manual.nssurge.com/scripting/http-request.html
+https://manual.nssurge.com/scripting/http-response.html
+
+Video quan sát giao diện:
+https://www.tiktok.com/@_if.hau.8/video/7703865188545465620
