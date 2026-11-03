@@ -53,7 +53,8 @@ class BoothServer(ThreadingHTTPServer):
             self.creation_cache = {k:v for k,v in self.creation_cache.items() if now < v['until']}
 
     def create_session(self, key, options):
-        normalized = {'layout': options.get('layout', 'grid4'), 'frame': options.get('frame', 'cat_cafe'), 'caption': options.get('caption', '')}
+        normalized = {'layout': options.get('layout'), 'frame': options.get('frame'),
+                      'caption': options.get('caption', ''), 'output': options.get('output', 'native')}
         fingerprint = hashlib.sha256(json.dumps(normalized, sort_keys=True).encode()).digest()
         with self.creation_lock:
             old = self.creation_cache.get(key)
@@ -182,18 +183,22 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, {'status': 'ok', 'protocol': PROTOCOL, 'locket_adapter': False})
         if method == 'GET' and path == '/v1/frames':
             return self._json(200, {'protocol': PROTOCOL, 'frames': [
-                {'id': f['id'], 'name': f['name'], 'art_layout': f.get('art_layout'), 'overlay_path': f'/v1/frames/{f["id"]}/overlay.png'} for f in FRAMES.values()
+                {'id': f['id'], 'name': f['name'], 'art_layout': f['art_layout'],
+                 'captures': len(f['art_slots']), 'preview_kind': 'ai_sample',
+                 'preview_path': f'/v1/frames/{f["id"]}/preview.png',
+                 'overlay_path': f'/v1/frames/{f["id"]}/overlay.png'} for f in FRAMES.values()
             ], 'layouts': [{'id': x['id'], 'name': x['name'], 'captures': len(x['slots'])} for x in LAYOUTS.values()]})
-        asset = re.fullmatch(r'/v1/frames/([a-z0-9_]+)/overlay\.png', path)
+        asset = re.fullmatch(r'/v1/frames/([a-z0-9_]+)/(overlay|preview)\.png', path)
         if method == 'GET' and asset:
             frame = FRAMES.get(asset[1])
             if not frame or not frame.get('art_asset'):
                 raise APIError(404, 'frame_not_found', 'Frame not found.')
-            data = (Path(__file__).parent/frame['art_asset']).read_bytes()
+            file = Path(__file__).parent / (frame['art_asset'] if asset[2] == 'overlay' else f'demo/{asset[1]}.png')
+            data = file.read_bytes()
             return self._send(200, data, 'image/png')
         if method == 'POST' and path == '/v1/sessions':
             key = self._key()
-            status, sid, info = self.server.create_session(key, self._object(('layout', 'frame', 'caption')))
+            status, sid, info = self.server.create_session(key, self._object(('layout', 'frame', 'caption', 'output')))
             return self._json(status, {'session_id': sid, **info, 'preview_path': f'/v1/sessions/{sid}/preview.png'})
         session = re.fullmatch(r'/v1/sessions/('+SID+r')', path)
         if session:

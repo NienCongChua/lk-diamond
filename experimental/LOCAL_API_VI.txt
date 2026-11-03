@@ -20,18 +20,27 @@ GET /v1/health
   JSON {status:"ok", protocol:"local-photobooth/1", locket_adapter:false}
 
 GET /v1/frames
-  8 tên khung, ID nội bộ, đường dẫn PNG overlay và 6 bố cục.
-  grid4 dùng artwork AI; 5 bố cục khác vẫn dùng khung dựng bằng code.
+  13 tên khung, ID nội bộ, overlay_path, preview_path và 6 bố cục.
+  Mỗi khung có art_layout và captures: số ảnh cần chụp. Cả sáu bố cục dùng AI.
+  preview_kind=ai_sample: ảnh minh họa AI đã ghép, không phải ảnh từ Locket.
 
 GET /v1/frames/{frame}/overlay.png
-  PNG gốc có alpha. Chỉ cho phép 8 ID trong catalogue.
+  PNG gốc có alpha. Chỉ cho phép 13 ID trong catalogue.
+
+GET /v1/frames/{frame}/preview.png
+  PNG đã ghép ảnh mẫu AI, giúp xem thiết kế khi có ảnh trong khung.
 
 POST /v1/sessions
   Content-Type: application/json
   Idempotency-Key: ID riêng cho một lần tạo phiên
-  Body: {"frame":"cherry_pop","layout":"grid4","caption":""}
+  Body: {"frame":"cherry_strip3","caption":"","output":"native"}
+  Có thể bỏ layout để tự chọn bố cục đúng với khung. Nếu chỉ truyền layout,
+  chọn artwork đầu tiên hỗ trợ bố cục đó. Truyền frame/layout không khớp: 400.
+  output=native (mặc định): giữ tỉ lệ khung, cạnh dài 1600 px.
+  output=square: thêm nền để vừa 1600×1600, không kéo méo hoặc cắt mất ảnh.
   Trả JSON: session_id, frame, layout, caption, count, total, complete,
-  preview_path. Tạo mới: 201; gửi lại cùng key và lựa chọn: 200 cùng phiên.
+  output, size [width,height], preview_path. Tạo mới: 201; gửi lại cùng key
+  và lựa chọn: 200 cùng phiên.
   Cùng key nhưng khác lựa chọn: 409. Cache key tạo phiên giữ 10 phút.
 
 POST /v1/sessions/{session_id}/captures/{index}
@@ -39,7 +48,7 @@ POST /v1/sessions/{session_id}/captures/{index}
   Content-Type: image/png, image/jpeg hoặc image/webp
   Idempotency-Key: ID ổn định của MỘT lần chụp
   Body: byte ảnh trực tiếp, không JSON/base64/URL; tối đa 8 MiB, 24 MP.
-  Trả PNG vuông 1600 x 1600 sau mỗi lần chụp, kèm header:
+  Trả PNG theo output đã chọn sau mỗi lần chụp, kèm header:
     X-Booth-Count: số ảnh đã lưu
     X-Booth-Total: số ảnh cần chụp
     X-Booth-Complete: true hoặc false
@@ -60,7 +69,7 @@ PATCH /v1/sessions/{session_id}
   Content-Type: application/json
   Body: {"frame":"cosmic"} và/hoặc {"caption":"Kỷ niệm"}
   Giữ nguyên các ảnh đã chụp, đổi khung/chữ và trả PNG mới.
-  Không đổi bố cục của phiên đang chụp. Muốn đổi bố cục thì tạo phiên mới.
+  Khung mới phải cùng bố cục. Muốn đổi bố cục thì tạo phiên mới.
   Lỗi render không làm thay đổi lựa chọn hoặc làm mất ảnh hiện tại.
 
 DELETE /v1/sessions/{session_id}

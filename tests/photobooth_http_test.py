@@ -56,8 +56,9 @@ class HTTPTest(unittest.TestCase):
         self.assertFalse(self.client.health()['locket_adapter'])
         data = self.client.catalogue()
         self.assertEqual(data['protocol'],'local-photobooth/1')
-        self.assertEqual(len(data['frames']),8)
+        self.assertEqual(len(data['frames']),13)
         self.assertEqual(len(data['layouts']),6)
+        self.assertTrue(all(f['preview_kind']=='ai_sample' for f in data['frames']))
 
     def test_token_host_and_origin_checks(self):
         self.assertEqual(self.request('GET','/v1/frames',token=False)[0],401)
@@ -100,8 +101,19 @@ class HTTPTest(unittest.TestCase):
         self.assertEqual(err.exception.code,'capture_incomplete')
         second = self.client.capture(sid,2,'two',photo('blue'))
         self.assertTrue(second.complete)
-        with Image.open(io.BytesIO(second.png)) as image:self.assertEqual(image.size,(1600,1600))
+        with Image.open(io.BytesIO(second.png)) as image:self.assertEqual(image.size,(1067,1600))
         self.assertEqual(self.client.preview(sid,final=True).png,second.png)
+
+    def test_strip_selection_previews_and_square_export(self):
+        spec=next(f for f in self.client.catalogue()['frames'] if f['id']=='film_strip4')
+        status,headers,body=self.request('GET',spec['preview_path'])
+        self.assertEqual(status,200)
+        with Image.open(io.BytesIO(body)) as img:self.assertEqual(img.size,(533,1600))
+        meta=self.client.start(frame='film_strip4',output='square')
+        self.assertEqual((meta['layout'],meta['total'],meta['size']),('strip4',4,[1600,1600]))
+        with self.assertRaises(ServiceError) as error:self.client.restyle(meta['session_id'],frame='bow_duo')
+        self.assertEqual(error.exception.status,400)
+        self.assertEqual(self.client.info(meta['session_id'])['count'],0)
 
     def test_capture_retry_and_conflict(self):
         sid = self.client.start()['session_id']

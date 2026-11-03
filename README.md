@@ -24,9 +24,17 @@ Các URL `script-path` trong module được ghim vào commit đã kiểm tra. K
 
 - [Gói nhỏ cho iPhone](https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-iPhone-Probe.zip)
 - [Toàn bộ mã nguồn và gói thử](https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Filter-Trial.zip)
-- [8 khung PNG tạo bằng imagegen](https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Photobooth-AI-Frames.zip)
+- [13 khung PNG tạo bằng imagegen](https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Photobooth-AI-Frames.zip)
 
-![8 khung AI](experimental/demo/frames-ai-preview.png)
+## Khung có ảnh mẫu và nhiều bố cục
+
+Đã có 13 artwork AI: 8 khung 2×2, dải 3 ảnh Cherry, dải 4 ảnh Film Club, đôi dọc nơ tím, một ảnh lớn + hai ảnh nhỏ và Polaroid tiệm mèo. Mỗi khung có vùng đặt ảnh đo từ PNG thật; chọn khung sẽ chọn đúng số lần chụp. Các bố cục này dùng artwork AI, không còn tự chuyển sang khung vẽ bằng code.
+
+Ảnh dưới là **ảnh mẫu AI ghép bằng bộ xử lý trên máy tính**, không phải ảnh chụp trong Locket. File trong `experimental/frames-ai/` vẫn có ô trong suốt để đặt ảnh của người dùng; file xem trước trong `experimental/demo/` đã có ảnh. `native` giữ tỉ lệ khung, cạnh dài 1600 px; `square` thêm nền để vừa 1600×1600, không kéo méo hoặc cắt dải ảnh.
+
+![13 khung có ảnh mẫu AI, sáu bố cục](experimental/demo/frames-ai-preview.png)
+
+Tình trạng và phần còn thiếu để nối Locket: [NATIVE_STATUS_VI.md](experimental/NATIVE_STATUS_VI.md).
 
 ## Thử phần ghép trên máy tính
 
@@ -36,6 +44,8 @@ python experimental/photobooth_http_demo.py
 ```
 
 Lệnh tự mở dịch vụ localhost, gửi 4 ảnh giả lập, thử gửi lại request và đổi khung, rồi dừng dịch vụ. Kết quả ở `experimental/http-demo/`. Đây không phải lần thử trên iPhone.
+
+Tạo lại toàn bộ ảnh minh họa bằng `python experimental/native_photobooth.py --demo experimental/demo`. Gói ZIP giữ ảnh xem trước từng khung và bảng mẫu; ảnh trung gian của từng lần chụp và ảnh HTTP demo được tạo lại bằng hai lệnh trên để giảm dung lượng tải.
 
 Hướng dẫn đầy đủ: [START_HERE_VI.txt](START_HERE_VI.txt), [README_VI.md](README_VI.md), [cách thử filter](experimental/TRY_NATIVE_VI.txt).
 

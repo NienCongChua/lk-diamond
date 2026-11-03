@@ -35,10 +35,13 @@ chính xác. HTTP 200 cũng chưa chứng minh filter thành công: có thể l�
 2. LÕI GHÉP ĐÃ CÓ TRONG MÁY TÍNH
 
 experimental/native_photobooth.py
-  - Bố cục grid4 dùng 8 khung PNG v2 tạo bằng imagegen, có sticker/ren/nơ và
-    chất liệu giấy. PNG nằm ở experimental/frames-ai/, có alpha thật.
-  - Năm bố cục khác vẫn dùng khung vẽ bằng code, chưa dùng bộ artwork mới.
-  - Lưu 1 đến 4 ảnh trong phiên; xuất PNG vuông 1600 px sau mỗi lần chụp.
+  - Có 13 khung PNG tạo bằng imagegen cho cả sáu bố cục, có sticker/ren/nơ
+    và chất liệu giấy. PNG nằm ở experimental/frames-ai/, có alpha thật.
+  - Dải 3/4 ảnh, đôi dọc, Polaroid và một lớn + hai nhỏ có artwork riêng.
+  - Lưu 1 đến 4 ảnh trong phiên; xuất PNG đúng tỉ lệ, cạnh dài 1600 px.
+    Có thể chọn output=square để thêm nền vuông, giữ trọn dải ảnh.
+  - experimental/demo/frames-ai-preview.png đã ghép ảnh mẫu AI; đây không
+    phải ảnh chụp trong Locket. Chi tiết: experimental/NATIVE_STATUS_VI.md.
   - Giữ thứ tự ảnh; request gửi lại dùng cùng capture_id không thêm ảnh trùng.
   - Hai lần chụp có nội dung giống nhau vẫn được giữ nếu capture_id khác nhau.
   - Phiên hoàn tất cần tạo phiên mới; có xóa và hết hạn, giới hạn 4 phiên.

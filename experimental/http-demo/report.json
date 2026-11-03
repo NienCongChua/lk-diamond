@@ -8,32 +8,32 @@
       "capture": 1,
       "complete": false,
       "file": "http-capture-1-of-4.png",
-      "elapsed_ms": 326,
-      "sha256": "bb6787eacaa74ff91c4dfae33f0aefe0a06e00dec392bd69d1ef20698a431492"
+      "elapsed_ms": 235,
+      "sha256": "2f3fabaa8ea98e339ed00d4a3eb3d6252ac5b7df870174f807f412e1b4a6803a"
     },
     {
       "capture": 2,
       "complete": false,
       "file": "http-capture-2-of-4.png",
-      "elapsed_ms": 247,
-      "sha256": "82e561099e24c9d0946d7565f4dde542b1b671fcaad3a652e5ad2a8a4562f119"
+      "elapsed_ms": 270,
+      "sha256": "164b31d4b486e66904a2c08b28622d6a080106feda93c9998a92d58bb6a1bbbf"
     },
     {
       "capture": 3,
       "complete": false,
       "file": "http-capture-3-of-4.png",
-      "elapsed_ms": 265,
-      "sha256": "0e03a9b4215aaeb9a97470f7a1d5f343e724a7d05170a232ea81369c429cf63b"
+      "elapsed_ms": 275,
+      "sha256": "f73f5669b4506df0b546b33a5463d681fdee3f806c1de26206c6ff8a6a72eba1"
     },
     {
       "capture": 4,
       "complete": true,
       "file": "http-capture-4-of-4.png",
-      "elapsed_ms": 292,
+      "elapsed_ms": 297,
       "sha256": "206153d2dd27e39d12f2b982e35f97fa68b6456a02af548ca2d06558f1c7c2b0"
     }
   ],
-  "frame_count": 8,
+  "frame_count": 13,
   "retry_did_not_add_photo": true,
   "restyle_preserved_four_photos": true,
   "deleted_session_unavailable": true,

@@ -1,7 +1,8 @@
 GÓI THỬ LOCKET + PHOTOBOOTH — 03/11/2026
 
-ĐÃ CHẠY: dịch vụ ghép 4 ảnh qua HTTP trên máy tính, 8 khung AI, đổi khung
-giữ nguyên ảnh, xử lý gửi lại request, hết hạn và xóa phiên.
+ĐÃ CHẠY: bộ ghép 1–4 ảnh trên máy tính, 13 khung AI cho sáu bố cục,
+giữ tỉ lệ dải ảnh/đôi dọc/Polaroid, đổi khung cùng bố cục giữ nguyên ảnh,
+xử lý gửi lại request, hết hạn và xóa phiên. Ảnh xem trước đã ghép ảnh mẫu AI.
 CHƯA CHẠY: Photobooth ngay trong Locket. Chưa có adapter/API filter thực tế.
 Module Probe bên dưới chỉ dùng xác định điểm nối; nó không thêm nút Photobooth.
 

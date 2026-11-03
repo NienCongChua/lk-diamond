@@ -85,8 +85,13 @@ class BoothClient:
     def catalogue(self):
         return self._json('GET', '/v1/frames')
 
-    def start(self, frame='cat_cafe', layout='grid4', caption='', creation_id=None):
-        return self._json('POST', '/v1/sessions', {'frame':frame, 'layout':layout, 'caption':caption}, creation_id or secrets.token_urlsafe(18))
+    def start(self, frame=None, layout=None, caption='', creation_id=None, output='native'):
+        options = {'caption':caption, 'output':output}
+        if frame is not None:
+            options['frame'] = frame
+        if layout is not None:
+            options['layout'] = layout
+        return self._json('POST', '/v1/sessions', options, creation_id or secrets.token_urlsafe(18))
 
     def capture(self, sid, index, capture_id, image, content_type='image/png'):
         return self._photo(self._request('POST', f'/v1/sessions/{sid}/captures/{index}', image,

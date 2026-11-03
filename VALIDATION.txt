@@ -1,3 +1,23 @@
+MULTI-LAYOUT AI FRAMES — 2026-11-03
+PASS: python -m unittest discover -s tests -p '*_test.py' — 34 cases.
+Includes all 13 AI frames, correct 1/2/3/4 capture totals, each photo's
+center pixel in its measured aperture, native aspect ratios, square padding
+without cropping, mismatch rejection without photo loss, catalogue previews,
+HTTP retries, expiration and session isolation.
+PASS: python experimental/photobooth_http_demo.py — four real loopback HTTP
+captures, retry, restyle, final download, deletion; server stopped.
+PASS: visually inspected filled 13-frame gallery. Five new overlays were
+copied from built-in imagegen output without modifying the original alpha.
+The old transparent-only gallery was replaced by a labeled AI-photo preview.
+All six layouts now have AI artwork. The older procedural fallback was removed
+from the experimental engine. Native output keeps aspect ratio; square output
+pads instead of stretching. This supersedes older grid4-only notes below.
+NOT COMPLETE: Locket/Shadowrocket camera integration, native filter catalogue
+registration, request/response adapter and phone end-to-end validation.
+No new native Photobooth functionality is claimed for Locket-Custom.sgmodule.
+PASS: full ZIP extracted into a fresh directory; all 13 artwork/preview paths
+exist; one-photo Polaroid completed over HTTP at native 1400 x 1600.
+
 Locket Custom v1.0 — validation record, 2026-11-03
 
 GITHUB PUBLICATION CANDIDATE — 2026-11-03

@@ -58,6 +58,41 @@
       "file": "frames-ai/bow_party-v2.png",
       "prompt": "Use case: stylized-concept.\nAsset type: production PNG photobooth overlay for an image compositor, NOT a mockup.\nCreate ONE beautifully art-directed square 1024x1024 photobooth frame, front-on, edge-to-edge. Premium collectible Korean photo-booth stationery: sophisticated handmade collage, tactile paper, lovingly detailed illustrated stickers, exquisite small material details. It must feel designed by an excellent stationery illustrator, never like clipart circles or basic computer-drawn shapes.\nCRITICAL FUNCTIONAL LAYOUT: four large empty photo windows in a 2 by 2 grid. Approximate pixel rectangles on a 1024 square: top left x80 y64 width416 height392; top right x528 y64 width416 height392; bottom left x80 y488 width416 height392; bottom right x528 y488 width416 height392. Keep all four windows equal, aligned, nearly square with subtly rounded corners. These four windows must be genuinely transparent alpha holes. All surrounding paper including the central horizontal and vertical gutters is opaque. Fill the outside edges of the canvas with the paper frame, no floating product and no external background.\nPlace rich illustrations and embellishments in the outer margins and bottom band, with a few small die-cut decorations overlapping only the corners of photo openings. Keep the large central areas of every photo hole unobstructed. Generous breathing room, thoughtful asymmetry and balanced clusters; intricate work up close, readable silhouette at thumbnail size.\nNo people, no photographs inside holes, no placeholder colors, no checkerboard painted into holes. No words, letters, numbers, captions, logos or watermarks. Do not show multiple designs, a contact sheet, a phone, a poster mockup or a perspective product shot.\n\nART DIRECTION:\nAiry lilac and pearl-white couture stationery. Exquisite lavender satin ribbon bows with fine luminous folds, delicate white daisies and a few tiny hydrangea petals, scalloped lace edge accents, pearl bead strings kept along border edges, subtle pale-lilac gingham fabric scraps. An asymmetric bow-and-flower arrangement across the bottom band and two smaller top-corner accents. Dreamy romantic tactile scrapbook, very high polish, no harsh purple grid or simplistic vector flowers.\nThe inside of each photo window is completely empty, clean uniform alpha=0 across its entire interior. No dust, cloud effects, painted transparent-looking pattern or colored fringe in the holes.",
       "sha256": "67f63febe0507066792134c353c235d3ce277a0425a50a01fbf7f0abb3ed6fd9"
+    },
+    {
+      "id": "cherry_strip3",
+      "name": "Cherry · dải 3 ảnh",
+      "file": "frames-ai/cherry_strip3-v1.png",
+      "prompt": "Use case: stylized-concept. Production asset: an exquisitely designed Korean photobooth strip overlay, tall narrow portrait canvas 900 x 2100, ratio 3:7. Opaque blush pink handmade paper with tiny cherries, delicate white lace edging, small realistic satin bows, rose embroidery and a subtle pearl charm. EXACTLY THREE genuinely transparent rectangular photo holes in one vertical column. Each hole spans x=12% to 88%; first y=5% to 30%, second y=34% to 59%, third y=63% to 88%. Keep holes totally empty alpha=0, no white fill or checkerboard drawing. All decoration only on the opaque margins; airy balanced premium stationery, not cartoon clipart. Broad decorated footer at bottom, no text or letters, no logos. Flat front-on artwork, no perspective, outer rectangle fills entire canvas, no shadows outside. Preserve fully transparent apertures.",
+      "sha256": "028eca092b4c97be874f288d7a45a21d1064d3e498333019918a6753ae64fcbf"
+    },
+    {
+      "id": "film_strip4",
+      "name": "Film Club · dải 4 ảnh",
+      "file": "frames-ai/film_strip4-v1.png",
+      "prompt": "Use case: stylized-concept. A production transparent PNG camera-film photobooth frame. Very tall narrow rectangle ratio 1:3. Exactly FOUR completely empty TRANSPARENT photo windows stacked in one vertical column, with crisp thin opaque black separators. Every photo window is an alpha-zero cutout from edge to edge. Photo window rectangles: x=12%..88%, y=4%..24%, 27%..47%, 50%..70%, 73%..93%. Entire interiors fully removed, perfectly uniform transparent, no frosting, no gray fill, no vignette, no colored haze, no fake checkerboard. The opaque charcoal BLACK frame only surrounds the empty windows. Decorative tiny gold stars and miniature finely illustrated vintage camera at bottom. Cream film perforations on left/right opaque borders. Flat front view, beautiful restrained film stationery, no perspective, no photography, no people, no writing.",
+      "sha256": "d039e8fb26897c3f8e3395057b1c39ffe29f79413167bb590a1f4bfcecd1da1f"
+    },
+    {
+      "id": "bow_duo",
+      "name": "Nơ tím · đôi dọc",
+      "file": "frames-ai/bow_duo-v1.png",
+      "prompt": "Use case: stylized-concept. Beautiful production photobooth frame overlay in tall portrait ratio 2:3 canvas1200x1800. Pale lilac satin, ivory lace borders, silky lavender ribbons and bows, scattered tiny pearls, little pressed lilac flowers. EXACTLY TWO large genuinely transparent rectangular photo holes stacked vertically. Both x=9% to91%; top y=6% to44%, bottom y=49% to87%. Hole interiors fully transparent alpha=0, no photos, no white fill, no checkered pattern. Opaque lilac border, restrained elegant embellishments on margins, airy chic boutique stationery not cartoon. Footer decorated with a small bow, no text, no logo. Flat front-on, full canvas rectangle, no perspective, no mockup.",
+      "sha256": "8187ecde99ad1d97c100558d268290d105cf33b4fcc0f918557a7c4183387b21"
+    },
+    {
+      "id": "scrapbook_hero3",
+      "name": "Sổ hoa · 1 lớn + 2 nhỏ",
+      "file": "frames-ai/scrapbook_hero3-v1.png",
+      "prompt": "Use case: stylized-concept. Production photobooth overlay canvas1600x1800 ratio8:9. Fine cream handmade scrapbook paper, pressed daisies and baby blue forget-me-nots, sage linen washi tape, subtly torn craft paper edges, tiny vintage botanical stickers. EXACTLY THREE genuinely transparent rectangular photo holes: one BIG landscape hole x=7% to93%, y=6% to53%; underneath TWO smaller equally sized holes: left x=7% to47%, right x=53% to93%, both y=58% to87%. All holes fully alpha=0, not filled white, no photos, no checkerboard. Tasteful airy layout, charming premium textures, all decoration confined to margins and divider. No text, no logo. Opaque outer rectangle full canvas, front-on, no perspective.",
+      "sha256": "216f7d6ebad2659b9f4aa3bf1143e609b1c182cdf1d01f6ecad342916abc82e0"
+    },
+    {
+      "id": "cat_polaroid",
+      "name": "Tiệm mèo · Polaroid",
+      "file": "frames-ai/cat_polaroid-v1.png",
+      "prompt": "Use case: stylized-concept. Premium Polaroid style photobooth overlay, canvas1400x1600 ratio7:8. Cream butter paper, a tiny beautifully illustrated sleepy fluffy kitten, miniature coffee cup and croissant stickers across the generous bottom border, very delicate caramel gingham and little hearts along margins. EXACTLY ONE large genuinely transparent photo hole x=8% to92%, y=6% to80%. Hole interior fully transparent alpha=0, no photo, no white fill, no checkerboard drawing. Preserve huge uncluttered photo area. Premium Japanese cafe stationery aesthetic, soft tactile watercolor illustration, no text no logo. Opaque rectangle fills canvas, perfectly flat front view, no mockup.",
+      "sha256": "12cd58af8b328fb54d0e3e0ba62393cfede06c7b015a7d94ace6b3312952e2c7"
     }
   ]
 }

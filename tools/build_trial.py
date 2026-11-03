@@ -15,6 +15,12 @@ def sources():
         allowed = {'.py', '.js', '.cjs', '.json', '.txt', '.md', '.html', '.png', '.svg', '.webp', '.sgmodule'}
         files += [p for p in (ROOT/directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts
                   and p.suffix in allowed and not any(part.startswith('.') for part in p.relative_to(ROOT).parts)]
+    # Reproducible intermediate demos duplicate many megabytes. Keep each frame's
+    # filled preview (served by the local API), the gallery and HTTP report.
+    files = [p for p in files if not (
+        (p.parent == ROOT/'experimental/demo' and (p.name.startswith('capture-') or p.name == 'contact-sheet.png'))
+        or (p.parent == ROOT/'experimental/http-demo' and p.suffix == '.png')
+    )]
     return sorted(set(files))
 
 
@@ -53,7 +59,7 @@ def main():
     hashed = files + [full, small]
     if art_zip.exists():
         hashed.append(art_zip)
-    (ROOT/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(ROOT).as_posix()+'\n' for p in sorted(hashed)), encoding='utf-8')
+    (ROOT/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(ROOT).as_posix()+'\n' for p in sorted(hashed)), encoding='utf-8', newline='\n')
 
 
 if __name__ == '__main__':

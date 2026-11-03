@@ -1,6 +1,6 @@
 {
-  "schema": "local-photobooth-engine-v2",
-  "note": "AI artwork is used for grid4. Other layouts keep procedural frames. Local engine metadata, NOT a Locket schema.",
+  "schema": "local-photobooth-engine-v3",
+  "note": "13 original AI frames across six layouts. Each artwork has its own measured photo apertures; never stretch an artwork to another layout. Local metadata, NOT a Locket filter schema.",
   "frames": [
     {
       "id": "cat_cafe",
@@ -328,6 +328,159 @@
           0.397129,
           0.35008
         ]
+      ]
+    },
+    {
+      "id": "cherry_strip3",
+      "name": "Cherry · dải 3 ảnh",
+      "background": "#FFF0F3",
+      "ink": "#663440",
+      "accent": "#DD7898",
+      "art_asset": "frames-ai/cherry_strip3-v1.png",
+      "art_layout": "strip3",
+      "art_slots": [
+        [
+          0.10388128,
+          0.06347439,
+          0.79223744,
+          0.23552339
+        ],
+        [
+          0.10388128,
+          0.33184855,
+          0.79223744,
+          0.23608018
+        ],
+        [
+          0.10388128,
+          0.60022272,
+          0.79223744,
+          0.23608018
+        ]
+      ],
+      "source_size": [
+        876,
+        1796
+      ]
+    },
+    {
+      "id": "film_strip4",
+      "name": "Film Club · dải 4 ảnh",
+      "background": "#28272A",
+      "ink": "#EEE7D4",
+      "accent": "#BBA176",
+      "art_asset": "frames-ai/film_strip4-v1.png",
+      "art_layout": "strip4",
+      "art_slots": [
+        [
+          0.11464088,
+          0.04143646,
+          0.77071823,
+          0.2228361
+        ],
+        [
+          0.11464088,
+          0.27854512,
+          0.77071823,
+          0.20441989
+        ],
+        [
+          0.11464088,
+          0.49723757,
+          0.77071823,
+          0.20395948
+        ],
+        [
+          0.11464088,
+          0.71546961,
+          0.77071823,
+          0.20441989
+        ]
+      ],
+      "source_size": [
+        724,
+        2172
+      ]
+    },
+    {
+      "id": "bow_duo",
+      "name": "Nơ tím · đôi dọc",
+      "background": "#F2EAF8",
+      "ink": "#674D81",
+      "accent": "#B59AD2",
+      "art_asset": "frames-ai/bow_duo-v1.png",
+      "art_layout": "duo",
+      "art_slots": [
+        [
+          0.10058594,
+          0.06575521,
+          0.79882812,
+          0.39388021
+        ],
+        [
+          0.10058594,
+          0.48958333,
+          0.79882812,
+          0.39973958
+        ]
+      ],
+      "source_size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": "scrapbook_hero3",
+      "name": "Sổ hoa · 1 lớn + 2 nhỏ",
+      "background": "#F1EAD8",
+      "ink": "#594D3C",
+      "accent": "#AC9270",
+      "art_asset": "frames-ai/scrapbook_hero3-v1.png",
+      "art_layout": "hero3",
+      "art_slots": [
+        [
+          0.06976744,
+          0.0655442,
+          0.85940803,
+          0.44558028
+        ],
+        [
+          0.06976744,
+          0.55441972,
+          0.40486258,
+          0.30426939
+        ],
+        [
+          0.52325581,
+          0.55441972,
+          0.40697674,
+          0.30426939
+        ]
+      ],
+      "source_size": [
+        946,
+        1663
+      ]
+    },
+    {
+      "id": "cat_polaroid",
+      "name": "Tiệm mèo · Polaroid",
+      "background": "#FFF0DE",
+      "ink": "#653D2E",
+      "accent": "#D69567",
+      "art_asset": "frames-ai/cat_polaroid-v1.png",
+      "art_layout": "polaroid",
+      "art_slots": [
+        [
+          0.07672634,
+          0.06636838,
+          0.84739983,
+          0.72930649
+        ]
+      ],
+      "source_size": [
+        1173,
+        1341
       ]
     }
   ]

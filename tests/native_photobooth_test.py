@@ -8,7 +8,7 @@ from unittest.mock import patch
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'experimental'))
-from native_photobooth import BoothEngine, FRAMES, LAYOUTS, MAX_BYTES, compose, normalize_image
+from native_photobooth import BoothEngine, FRAMES, LAYOUTS, MAX_BYTES, artwork, compose, normalize_image
 
 
 def photo(color='red', size=(400, 500)):
@@ -106,15 +106,56 @@ class NativeEngineTest(unittest.TestCase):
         with self.assertRaises(ValueError): normalize_image(raw.getvalue())
         with self.assertRaises(ValueError): normalize_image(photo(size=(12001, 1)))
 
-    def test_all_frames_and_layouts_render_square(self):
+    def test_all_frames_offer_square_output_without_changing_layout(self):
         images = [Image.new('RGB', (100, 150), 'teal')]*4
-        for frame in FRAMES:
+        for frame, spec in FRAMES.items():
             with self.subTest(frame=frame):
-                with Image.open(io.BytesIO(compose(images, frame_id=frame))) as img: self.assertEqual(img.size, (1600, 1600))
-        for layout in LAYOUTS:
-            with self.subTest(layout=layout):
-                count = len(LAYOUTS[layout]['slots'])
-                with Image.open(io.BytesIO(compose(images[:count], layout_id=layout))) as img: self.assertEqual(img.size, (1600, 1600))
+                count = len(spec['art_slots'])
+                with Image.open(io.BytesIO(compose(images[:count], frame_id=frame, output='square'))) as img:
+                    self.assertEqual(img.size, (1600, 1600))
+
+    def test_every_ai_frame_fills_all_its_slots_and_keeps_aspect_ratio(self):
+        colors = ['red', 'green', 'blue', 'yellow']
+        self.assertEqual({f['art_layout'] for f in FRAMES.values()}, set(LAYOUTS))
+        for frame, spec in FRAMES.items():
+            with self.subTest(frame=frame):
+                engine = BoothEngine()
+                sid = engine.start(frame=frame)
+                count = len(spec['art_slots'])
+                self.assertEqual(engine.info(sid)['total'], count)
+                for i in range(count):
+                    result = engine.capture(sid, str(i), i+1, photo(colors[i]))
+                    self.assertEqual(result['complete'], i+1 == count)
+                with Image.open(io.BytesIO(result['image'])) as img:
+                    w, h = artwork(frame).size
+                    self.assertAlmostEqual(img.width/img.height, w/h, delta=.001)
+                    self.assertEqual(max(img.size), 1600)
+                    for i, (x,y,sw,sh) in enumerate(spec['art_slots']):
+                        actual = img.getpixel((round((x+sw/2)*img.width),round((y+sh/2)*img.height)))
+                        expected = Image.new('RGB',(1,1),colors[i]).getpixel((0,0))
+                        self.assertLessEqual(max(abs(a-b) for a,b in zip(actual,expected)),6)
+
+    def test_incompatible_frame_is_rejected_without_losing_photos(self):
+        e = BoothEngine()
+        with self.assertRaises(ValueError):e.start(frame='film_strip4',layout='duo')
+        with self.assertRaises(ValueError):e.start(output='stretch')
+        sid=e.start(frame='cherry_strip3')
+        before=e.capture(sid,'one',1,photo())
+        with self.assertRaises(ValueError):e.restyle(sid,frame='cat_cafe')
+        self.assertEqual(e.preview(sid),before)
+        self.assertEqual(e.info(sid)['frame'],'cherry_strip3')
+
+    def test_square_strip_is_padded_and_preserves_all_four_photos(self):
+        colors=['red','green','blue','yellow']
+        photos=[Image.new('RGB',(100,150),c) for c in colors]
+        with Image.open(io.BytesIO(compose(photos,frame_id='film_strip4',output='square'))) as img:
+            w,h=artwork('film_strip4').size
+            fitted_w=round(w*1600/h)
+            left=(1600-fitted_w)//2
+            for i,(x,y,sw,sh) in enumerate(FRAMES['film_strip4']['art_slots']):
+                pixel=img.getpixel((left+round((x+sw/2)*fitted_w),round((y+sh/2)*1600)))
+                expected=photos[i].getpixel((0,0))
+                self.assertLessEqual(max(abs(a-b) for a,b in zip(pixel,expected)),6)
 
 
 if __name__ == '__main__':
