@@ -9,23 +9,25 @@ Module Probe bên dưới chỉ dùng xác định điểm nối; nó không th�
 THỬ TRÊN IPHONE SAU KHI ANH SẴN SÀNG
 
 Cài nhanh bằng URL (không cần nhập JS cục bộ):
-  Module chính:
+  Chỉ nhập MỘT bản gộp Custom + Probe để lấy log:
+  https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom-Probe.sgmodule
+  Tắt/bỏ chọn hai bản Custom và Probe riêng nếu đã nhập. Không cần chọn
+  hai config đồng thời. Bản gộp giữ caption/camera và thêm bộ dò filter.
+  Sau khi lấy log, chuyển lại bản Custom thường để ngừng ghi log:
   https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom.sgmodule
-  Module dò filter, bật thêm cùng Custom khi cần kiểm tra:
-  https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Filter-Probe.sgmodule
-Các script được ghim vào commit đã kiểm tra. Tắt module Locket cũ có rule trùng.
+Các script được ghim vào commit đã kiểm tra. Tắt module Locket khác có rule trùng.
 
 Nếu dùng file cục bộ thay vì URL:
 
 1. Dùng Locket-iPhone-Probe.zip nếu chỉ cần thử trên điện thoại.
-2. Nhập scripts/locket-filter-probe.js vào Shadowrocket và ánh xạ hai dòng
-   script-path trong Locket-Filter-Probe.local.sgmodule tới đúng file đã nhập.
-3. Bật Probe cùng module Custom hiện tại (hai bộ này dùng host khác nhau).
-   Nếu dùng bản Custom cũ, thay script bằng scripts/locket-custom.js trong gói.
+2. Nhập hai JS trong scripts/ vào Shadowrocket và ánh xạ các script-path
+   trong Locket-Custom-Probe.local.sgmodule tới đúng file đã nhập.
+3. Chọn bản gộp Locket-Custom-Probe.local.sgmodule để lấy log.
 4. Mở Locket, chọn filter, chụp thử rồi bấm X chụp lại một lần; chưa cần gửi ảnh.
 5. Lấy các dòng [Locket filter probe] trong log script, kèm thông báo lỗi
    nhìn thấy trong app. Không cần log mạng đầy đủ, mật khẩu hoặc token.
-6. Tắt Probe sau khi thử. Nếu không có log, xem experimental/TRY_NATIVE_VI.txt.
+6. Chuyển lại bản Custom thường sau khi thử để ngừng ghi log.
+   Nếu không có log, xem experimental/TRY_NATIVE_VI.txt.
 
 THỬ PHẦN GHÉP TRÊN MÁY TÍNH (GÓI Locket-Filter-Trial.zip)
 

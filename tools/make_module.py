@@ -46,7 +46,16 @@ hostname = %APPEND% api.locketcamera.com
 locket_filter_probe_request = type=http-request, pattern=^https:\\/\\/api\\.locketcamera\\.com(?:\\/|$), script-path={probe}, timeout=5
 locket_filter_probe_response = type=http-response, pattern=^https:\\/\\/api\\.locketcamera\\.com(?:\\/|$), script-path={probe}, requires-body=true, max-size=1048576, timeout=5
 '''
-    for name, content in [('Locket-Custom', text), ('Locket-Diagnostics', diagnostics), ('Locket-Filter-Probe', filter_probe)]:
+    combined = text.replace('#!name=Locket Custom v1.0', '#!name=Locket Custom + Filter Probe v1.0')
+    combined = combined.replace(
+        'Personal configurable rewrite. Native Photobooth layouts are not implemented.',
+        'Captions and camera settings plus temporary filter diagnostics in one file. No native Photobooth yet.')
+    combined = combined.replace(
+        'hostname = %APPEND% api.revenuecat.com, firebaseremoteconfig.googleapis.com',
+        'hostname = %APPEND% api.revenuecat.com, firebaseremoteconfig.googleapis.com, api.locketcamera.com')
+    combined += filter_probe.split('[Script]\n', 1)[1]
+    for name, content in [('Locket-Custom', text), ('Locket-Diagnostics', diagnostics),
+                          ('Locket-Filter-Probe', filter_probe), ('Locket-Custom-Probe', combined)]:
         path=directory/(name+suffix+'.sgmodule'); path.write_text(content,encoding='utf-8',newline='\n');print(path)
 
 if __name__=='__main__':

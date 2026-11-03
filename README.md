@@ -2,19 +2,27 @@
 
 ## Link cài trong Shadowrocket
 
+**Lấy log filter bằng một tệp duy nhất — Custom + Probe:**
+
+```text
+https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom-Probe.sgmodule
+```
+
+Bản này đã gồm caption/cấu hình camera và bộ dò filter. Chỉ dùng bản gộp khi lấy log; tắt hoặc bỏ chọn hai bản Custom và Probe riêng nếu đã nhập. Không cần chọn hai config cùng lúc. Sau khi lấy log, chuyển lại bản Custom thường bên dưới. Bản gộp chưa thêm Photobooth trong camera Locket.
+
 **Module chính — caption và cấu hình camera:**
 
 ```text
 https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom.sgmodule
 ```
 
-**Module dò filter — dùng thêm khi kiểm tra hiệu ứng:**
+**Module dò riêng — tùy chọn dành cho người quản lý module riêng biệt:**
 
 ```text
 https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Filter-Probe.sgmodule
 ```
 
-Thêm module từ URL trong Shadowrocket. Bản trực tuyến tự tham chiếu JS trên GitHub, không cần ánh xạ script cục bộ. Tắt module Locket cũ có rule trùng trước khi bật bản Custom mới. Probe có thể bật cùng Custom. HTTPS rewrite cần MITM và CA đã được thiết bị tin cậy; module không tự cài chứng chỉ.
+Thêm module từ URL trong Shadowrocket. Bản trực tuyến tự tham chiếu JS trên GitHub, không cần ánh xạ script cục bộ. Tắt module Locket cũ có rule trùng trước khi bật bản mới. HTTPS rewrite cần MITM và CA đã được thiết bị tin cậy; module không tự cài chứng chỉ. Bản gộp khai báo đủ ba host cần xử lý.
 
 Các URL `script-path` trong module được ghim vào commit đã kiểm tra. Khi cập nhật code, cần tạo lại module để chuyển sang commit mới; xem `tools/make_module.py`.
 

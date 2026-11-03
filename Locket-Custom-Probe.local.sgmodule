@@ -1,0 +1,12 @@
+#!name=Locket Custom + Filter Probe v1.0
+#!desc=Captions and camera settings plus temporary filter diagnostics in one file. No native Photobooth yet. Requires script setup.
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com, firebaseremoteconfig.googleapis.com, api.locketcamera.com
+
+[Script]
+nien_locket_remote = type=http-response, pattern=^https:\/\/firebaseremoteconfig\.googleapis\.com\/v1\/projects\/locket-[A-Za-z0-9_-]+\/namespaces\/[^/?#]+:fetch(?:\?[^#]*)?$, script-path=locket-custom.js, requires-body=true, max-size=1048576, timeout=10
+nien_locket_etag = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/v1\/(?:receipts|subscribers\/[^/?#]+)\/?(?:\?[^#]*)?$, script-path=locket-custom.js, timeout=10
+nien_locket_subscription = type=http-response, pattern=^https:\/\/api\.revenuecat\.com\/v1\/(?:receipts|subscribers\/[^/?#]+)\/?(?:\?[^#]*)?$, script-path=locket-custom.js, requires-body=true, max-size=1048576, timeout=10
+locket_filter_probe_request = type=http-request, pattern=^https:\/\/api\.locketcamera\.com(?:\/|$), script-path=locket-filter-probe.js, timeout=5
+locket_filter_probe_response = type=http-response, pattern=^https:\/\/api\.locketcamera\.com(?:\/|$), script-path=locket-filter-probe.js, requires-body=true, max-size=1048576, timeout=5

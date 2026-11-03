@@ -51,10 +51,10 @@ def main():
     files = sources()
     full = archive('Locket-Filter-Trial.zip', files)
     phone_files = [ROOT/name for name in [
-        'START_HERE_VI.txt', 'Locket-Custom.local.sgmodule', 'Locket-Filter-Probe.local.sgmodule',
+        'START_HERE_VI.txt', 'Locket-Custom.local.sgmodule', 'Locket-Filter-Probe.local.sgmodule', 'Locket-Custom-Probe.local.sgmodule',
         'scripts/locket-custom.js', 'scripts/locket-filter-probe.js', 'experimental/TRY_NATIVE_VI.txt',
     ]]
-    phone_files += [ROOT/name for name in ['Locket-Custom.sgmodule','Locket-Filter-Probe.sgmodule'] if (ROOT/name).is_file()]
+    phone_files += [ROOT/name for name in ['Locket-Custom.sgmodule','Locket-Filter-Probe.sgmodule','Locket-Custom-Probe.sgmodule'] if (ROOT/name).is_file()]
     small = archive('Locket-iPhone-Probe.zip', phone_files)
     hashed = files + [full, small]
     if art_zip.exists():

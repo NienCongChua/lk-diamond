@@ -1,3 +1,12 @@
+SINGLE-FILE CUSTOM + FILTER PROBE — 2026-11-03
+PASS: 44 rewrite and 11 probe JavaScript tests.
+PASS: local and hosted combined modules have exactly one MITM section,
+one Script section, five distinct hooks and three exact MITM hosts. Route
+checks select exactly one matching hook per phase; unrelated/HTTP/spoofed
+hosts do not match. Probe requests do not buffer image uploads.
+Hosted JS remains pinned to the previously verified d5c03bd commit.
+No native Photobooth functionality added; no on-device validation claimed.
+
 MULTI-LAYOUT AI FRAMES — 2026-11-03
 PASS: python -m unittest discover -s tests -p '*_test.py' — 34 cases.
 Includes all 13 AI frames, correct 1/2/3/4 capture totals, each photo's

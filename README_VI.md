@@ -102,6 +102,8 @@ Bản thử ngày 03/11/2026 có hai phần:
 
 Hướng dẫn thử cụ thể: `experimental/TRY_NATIVE_VI.txt`. Chưa có endpoint và mẫu request/response xử lý filter thực tế, nên chưa tạo adapter gửi ảnh, chưa chèn ID Photobooth tự đặt vào Locket. Lõi Python chỉ có thể chạy trên máy/host có Python và Pillow, không chạy trực tiếp trong Shadowrocket. Không có máy chủ ảnh được triển khai, không tự động gửi ảnh của anh đi đâu.
 
+Để lấy log bằng **một tệp duy nhất**, dùng [Locket-Custom-Probe.sgmodule](https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom-Probe.sgmodule). Bản gộp gồm toàn bộ rule Custom và hai rule Probe, đủ ba host MITM. Tắt/bỏ chọn Custom và Probe riêng khi dùng bản gộp; lấy log xong chuyển về Custom thường. Không cần chọn hai config đồng thời.
+
 Dịch vụ ảnh thử nghiệm trên localhost đã chạy qua HTTP với 4 ảnh giả lập, gửi lại request và đổi khung sau khi chụp. Dịch vụ tự dọn phiên, kiểm tra token local và không gọi API bên ngoài. Đã dừng dịch vụ sau khi kiểm tra; iPhone chưa kết nối được tới địa chỉ loopback của máy tính. `Locket-Filter-Trial.zip` chứa mã, tài nguyên, kiểm thử và hướng dẫn; `Locket-iPhone-Probe.zip` là gói nhỏ chỉ để thử module dò trên điện thoại.
 
 Bộ ghép mới trong `experimental/` đã có **13 khung AI cho cả sáu bố cục**. Khung dải ba/bốn ảnh, đôi dọc, Polaroid và một lớn + hai nhỏ có artwork riêng; khung và bố cục không phù hợp sẽ bị từ chối để tránh mất ô ảnh. Mặc định xuất đúng tỉ lệ khung với cạnh dài 1600 px; `output=square` thêm nền vuông mà không kéo méo ảnh. Thư viện xem trước `experimental/demo/frames-ai-preview.png` đã có ảnh mẫu AI trong khung. Các chức năng này vẫn thuộc bộ xử lý trên máy tính, chưa nằm trong camera Locket; xem `experimental/NATIVE_STATUS_VI.md`.

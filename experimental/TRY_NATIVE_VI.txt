@@ -5,7 +5,19 @@ CHƯA có Photobooth hoạt động trong Locket. Module dò không thêm filter
 Mục tiêu lần thử này: tìm vì sao có nút filter nhưng chọn hiệu ứng chưa chạy,
 và xác định API cần nối vào lõi ghép ảnh.
 
-1. TRÊN IPHONE
+1. TRÊN IPHONE — CHỈ MỘT TỆP
+
+- Nhập bản gộp trực tuyến:
+  https://raw.githubusercontent.com/NienCongChua/lk-diamond/main/Locket-Custom-Probe.sgmodule
+- Dùng bản gộp thay cho Custom và Probe riêng khi lấy log. Không cần chọn
+  hai config cùng lúc. Lấy log xong chuyển lại Locket-Custom.sgmodule.
+- HTTPS Decryption/MITM cần hoạt động cho ba host trong bản gộp; CA phải
+  được thiết bị tin cậy. Module không tự cài chứng chỉ.
+- Mở lại Locket, chọn một filter, chụp, bấm X và chụp lại; chưa cần gửi ảnh.
+- Chép các dòng [Locket filter probe] từ nhật ký script, kèm tên filter và
+  thông báo lỗi nếu có. Nếu không có dòng nào, báo lại để kiểm tra MITM/rule.
+
+TÙY CHỌN CŨ: NHẬP HAI MODULE RIÊNG
 
 - Cập nhật script locket-custom.js nếu đang dùng bản Custom của dự án.
   Bản sửa giữ danh sách filter máy chủ, thay vì ghi đè bằng 35 ID cũ.
